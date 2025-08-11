@@ -1,0 +1,15 @@
+workflows:
+  android-workflow:
+    name: Android APK
+    environment:
+      flutter: stable
+    scripts:
+      - name: Create Flutter project structure (if missing)
+        script: |
+          if [ ! -d "android" ]; then
+            flutter create .
+          fi
+      - flutter pub get
+      - flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
